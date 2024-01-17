@@ -80,3 +80,11 @@ e para rodar o que acabamos de criar e
 docker start api-solid-pg
 
 
+#prisma 
+Ao alterar o arquivo schema.prisma onde e possivel criar tabelas e relacoes entre elas 
+deve rodar o comando 
+npx prisma migrate dev, que vai vertificar a base e se tiver alteraceos sera realizada, deve se dar um nome para a migrate, 
+
+para ver a base pode usar o npx prisma studio
+
+

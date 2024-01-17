@@ -48,3 +48,16 @@ model Gym {
 
   @@map("gyms")
 }
+
+//para baixo sao tabelas do projeto pessoal
+model FaUsuario {
+  id              String   @id @default(uuid())
+  nome            String
+  email           String   @unique
+  password_hash   String
+  administrador   Boolean  @default(false)
+  data_nascimento DateTime
+  created_at      DateTime @default(now())
+
+  @@map("fa_usuario")
+}
