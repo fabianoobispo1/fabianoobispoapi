@@ -1,19 +1,22 @@
-import { expect,  describe, it } from 'vitest';
+import { expect,  describe, it, beforeEach } from 'vitest';
 import { FaUsuarioRegister } from './faUsuarioRegister';
 
 import { compare } from 'bcryptjs';
 import { InMemoryFaUsuariosRepository } from '@/repositories/in-memory/in-memory-faUsuarios-repository';
-import { UserAlreadyExistsError } from './erros/user-already-exists-error';
+import { UserAlreadyExistsError } from './errors/user-already-exists-error';
 
-
-
+let faUsuarioRepository: InMemoryFaUsuariosRepository;
+let sut: FaUsuarioRegister;
 describe('Registro usuario FA', () => {
+    beforeEach(() => {
+        faUsuarioRepository = new InMemoryFaUsuariosRepository;
+        sut = new FaUsuarioRegister(faUsuarioRepository);
+    });
 
     it('E possivel realizar o registro de usuario', async () => {
-        const faUsuarioRepository = new InMemoryFaUsuariosRepository;
-        const faUsuarioRegister = new FaUsuarioRegister(faUsuarioRepository);
+       
 
-        const { faUsuario } = await faUsuarioRegister.execute({
+        const { faUsuario } = await sut.execute({
             nome: 'Usuario teste',
             email: 'email@teste.com.br',
             password: '123456',
@@ -27,10 +30,9 @@ describe('Registro usuario FA', () => {
 
 
     it('E possivel criar a hash durnate o registro', async () => {
-        const faUsuarioRepository = new InMemoryFaUsuariosRepository;
-        const faUsuarioRegister = new FaUsuarioRegister(faUsuarioRepository);
 
-        const { faUsuario } = await faUsuarioRegister.execute({
+
+        const { faUsuario } = await sut.execute({
             nome: 'Usuario teste',
             email: 'email@teste.com.br',
             password: '123456',
@@ -47,12 +49,11 @@ describe('Registro usuario FA', () => {
     });
 
     it('Nao e possivel registar com o mesmo email duas vezes ', async () => {
-        const faUsuarioRepository = new InMemoryFaUsuariosRepository;
-        const faUsuarioRegister = new FaUsuarioRegister(faUsuarioRepository);
+
 
         const email = 'email@teste.com.br';
         
-        await faUsuarioRegister.execute({
+        await sut.execute({
             nome: 'Usuario teste',
             email,
             password: '123456',
@@ -61,7 +62,7 @@ describe('Registro usuario FA', () => {
 
 
         await expect(() =>
-            faUsuarioRegister.execute({
+            sut.execute({
                 nome: 'Usuario teste',
                 email,
                 password: '123456',

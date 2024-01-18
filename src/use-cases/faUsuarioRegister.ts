@@ -1,6 +1,6 @@
 import { FaUsuarioRepository } from '@/repositories/faUsuario-repository';
 import { hash } from 'bcryptjs';
-import { UserAlreadyExistsError } from './erros/user-already-exists-error';
+import { UserAlreadyExistsError } from './errors/user-already-exists-error';
 import { FaUsuario } from '@prisma/client';
 
 interface RegisterFaUsuarioRequest {

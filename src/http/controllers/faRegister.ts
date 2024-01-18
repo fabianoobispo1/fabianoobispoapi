@@ -1,8 +1,8 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import {  z } from 'zod';
-import { UserAlreadyExistsError } from '@/use-cases/erros/user-already-exists-error';
-import { PrismaFausuarioRepository } from '@/repositories/prisma/prisma-faUsuario-repository';
-import { FaUsuarioRegister } from '@/use-cases/faUsuarioRegister';
+import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error';
+
+import { makefaUsuarioRegister } from '@/use-cases/factories/make-faUsuario-use-case';
 
 export async function faRegister(request: FastifyRequest, reply: FastifyReply) {
 
@@ -16,8 +16,8 @@ export async function faRegister(request: FastifyRequest, reply: FastifyReply) {
     const { nome, email, password, data_nascimento } = registerBodySchema.parse(request.body);
 
     try {
-        const faUsuarioRepository = new PrismaFausuarioRepository();
-        const faUsuarioRegister = new FaUsuarioRegister(faUsuarioRepository);
+     
+        const faUsuarioRegister = makefaUsuarioRegister();
     
         await faUsuarioRegister.execute({
             nome,

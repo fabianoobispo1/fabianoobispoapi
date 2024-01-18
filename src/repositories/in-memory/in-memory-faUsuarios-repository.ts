@@ -1,5 +1,6 @@
 import { FaUsuarioRepository } from '@/repositories/faUsuario-repository';
 import { FaUsuario, Prisma } from '@prisma/client';
+import { randomUUID } from 'node:crypto';
 
 export class InMemoryFaUsuariosRepository implements FaUsuarioRepository {
     public items: FaUsuario[] = [];
@@ -18,7 +19,7 @@ export class InMemoryFaUsuariosRepository implements FaUsuarioRepository {
 
     async create(data: Prisma.FaUsuarioCreateInput) {
         const faUsuario = {            
-            id: 'user-1',
+            id: randomUUID(),
             nome: data.nome,
             email: data.email,                    
             password_hash: data.password_hash,           
