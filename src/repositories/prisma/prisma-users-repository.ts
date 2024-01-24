@@ -6,7 +6,7 @@ import { UsersRepository } from '../users-repository';
 
 export class PrismaUsersRepository implements UsersRepository{
     
-    indById(id: string): Promise<{ id: string; name: string; email: string; password_hash: string; created_at: Date; } | null> {
+    findById(id: string): Promise<{ id: string; name: string; email: string; password_hash: string; created_at: Date; } | null> {
         throw new Error('Method not implemented.');
     }
     async findByEmail(email: string) {

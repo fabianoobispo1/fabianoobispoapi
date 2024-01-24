@@ -22,4 +22,9 @@ export class PrismaFausuarioRepository implements FaUsuarioRepository{
 
         return user;
     }
+
+    async findById(id: string): Promise<{ id: string; nome: string; email: string; password_hash: string;  data_nascimento: Date ; administrador:boolean; created_at: Date; } | null> {
+        throw new Error('Method not implemented.');
+    }
+    
 }
