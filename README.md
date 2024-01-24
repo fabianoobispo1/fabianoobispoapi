@@ -9,10 +9,10 @@ GymPass Style App
 - [x] Deve aer possivel obter o perfil de usuario logado ;
 - [x] Deve aer possivel o numero de check-ins realizados pelo usuario;
 - [x] Deve aer possivel o usuario obter seu historico de check-ins;
-- [ ] Deve aer possivel o usuario buscar academias proximas;
+- [x] Deve aer possivel o usuario buscar academias proximas ate 10 km;
 - [x] Deve aer possivel o usuario buscar academias pelo nome;
 - [x] Deve aer possivel o usuario realizar check-in em uma academia;
-- [ ] Deve aer possivel validar o check-in de um usuario;
+- [x] Deve aer possivel validar o check-in de um usuario;
 - [x] Deve aer possivel cadastrar uma academia;
 
 ## RNs (Regras ne negocio)
@@ -20,7 +20,7 @@ GymPass Style App
 - [x] O usuario não deve poder se cadastrar com email duplicado;
 - [x] O usuario não pode fazer dois check-in no mesmo dia;
 - [x] O usuario não pode fazer check-in se nao estiver perto (100m) da academia;
-- [ ] O check-in so pode ser validado ate 20 min apos criado;
+- [x] O check-in so pode ser validado ate 20 min apos criado;
 - [ ] O check-in so pode ser validado por administradores;
 - [ ] A academia so pode ser cadastrada por administradores;
 
