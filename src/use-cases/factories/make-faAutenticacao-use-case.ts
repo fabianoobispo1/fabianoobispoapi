@@ -1,9 +1,9 @@
 import { PrismaFausuarioRepository } from '@/repositories/prisma/prisma-faUsuario-repository';
-import { FaUsuarioRegister } from '../faUsuarioRegister';
+import { FaAutenticacaoUseCase } from '../faAutenticacao';
 
-export function makefaUsuarioRegister() {
+export function makeFaAutenticacaoUseCase() {
     const faUsuarioRepository = new PrismaFausuarioRepository();
-    const useCase = new FaUsuarioRegister(faUsuarioRepository);
+    const useCase = new FaAutenticacaoUseCase(faUsuarioRepository);
 
     return useCase;
 }
