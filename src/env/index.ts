@@ -5,6 +5,8 @@ import { z }  from 'zod';
 //logo a abixo e possivel padronizar as variaveis do arquivo .env e caso precise deixr um valor default 
 const envSchema = z.object({
     NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
+    JWT_SECRET_GYM: z.string(),
+    JWT_SECRET_FA: z.string(),
     PORT: z.coerce.number().default(3333)
 });
 

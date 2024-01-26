@@ -18,9 +18,22 @@ export async function faAutenticacao(
     try {        
         const authenticateUseCase =makeFaAutenticacaoUseCase();
 
-        await authenticateUseCase.execute({
+        const { faUsuario } = await authenticateUseCase.execute({
             email,
             password,
+        });
+           
+        const token = await reply.faSign(
+            {},
+            {
+                sign: {
+                    sub: faUsuario.id,
+                },
+            },
+        );
+      
+        return reply.status(200).send({
+            token,
         });
     } catch (err) {
         if (err instanceof InvalidCredentialsError) {
@@ -30,5 +43,5 @@ export async function faAutenticacao(
         throw err;
     }
 
-    return reply.status(200).send();
+
 }

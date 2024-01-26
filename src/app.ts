@@ -2,10 +2,25 @@ import fastify from 'fastify';
 import { appRoutes } from '@/http/routes';
 import { ZodError } from 'zod';
 import { env } from '@/env';
+import fastifyJwt from '@fastify/jwt';
 
 
 export const app = fastify();
 
+app.register(fastifyJwt, {
+    secret: env.JWT_SECRET_GYM,
+    namespace: 'gym',
+    jwtVerify: 'gymVerify',
+    jwtSign: 'gymSign'
+});
+
+app.register(fastifyJwt, {
+    secret: env.JWT_SECRET_FA,
+    namespace: 'fa',
+    jwtVerify: 'faVerify',
+    jwtSign: 'faSign'
+});
+  
 app.register(appRoutes);
 
 app.setErrorHandler((error, _, reply) => {
