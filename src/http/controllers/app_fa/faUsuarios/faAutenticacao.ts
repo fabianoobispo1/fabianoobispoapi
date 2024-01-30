@@ -31,10 +31,29 @@ export async function faAutenticacao(
                 },
             },
         );
+
+
+        const refreshToken = await reply.faSign(
+            {},
+            {
+                sign: {
+                    sub: faUsuario.id,
+                    expiresIn: '7d',
+                },
+            },
+        );
       
-        return reply.status(200).send({
-            token,
-        });
+        return reply
+            .setCookie('refreshTokenFa', refreshToken, {
+                path: '/',
+                secure: true,
+                sameSite: true,
+                httpOnly: true,
+            })
+            .status(200)
+            .send({
+                token,
+            });
     } catch (err) {
         if (err instanceof InvalidCredentialsError) {
             return reply.status(400).send({ message: err.message });

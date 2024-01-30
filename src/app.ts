@@ -1,4 +1,5 @@
 import fastify from 'fastify';
+import fastifyCookie from '@fastify/cookie';
 
 import { ZodError } from 'zod';
 import { env } from '@/env';
@@ -12,17 +13,34 @@ export const app = fastify();
 
 app.register(fastifyJwt, {
     secret: env.JWT_SECRET_GYM,
+    cookie:{
+        cookieName:'refreshTokenGym',
+        signed:false        
+    },
     namespace: 'gym',
     jwtVerify: 'gymVerify',
-    jwtSign: 'gymSign'
+    jwtSign: 'gymSign',
+    sign:{
+        expiresIn:'10m'
+    }
 });
 
 app.register(fastifyJwt, {
     secret: env.JWT_SECRET_FA,
+    cookie:{
+        cookieName:'refreshTokenFa',
+        signed:false        
+    },
     namespace: 'fa',
     jwtVerify: 'faVerify',
-    jwtSign: 'faSign'
+    jwtSign: 'faSign',
+    sign:{
+        expiresIn:'10m'
+    }
 });
+
+
+app.register(fastifyCookie);
 
 app.register(appGymRoutes);
 app.register(appFaRoutes);
