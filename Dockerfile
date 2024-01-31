@@ -10,7 +10,7 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["npm", "build"]
+CMD ["tsup", "src --out-dir build"]
 
 
 
