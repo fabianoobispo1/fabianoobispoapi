@@ -9,6 +9,6 @@ RUN npm install
 COPY . .
 
 EXPOSE 3333
-CMD ["npm", "dev"]
+CMD ["npm run build", "npm run start"]
 
 
