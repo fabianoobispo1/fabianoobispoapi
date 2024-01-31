@@ -1,14 +1,21 @@
+# Node.js Application
+FROM node:lts
 
-FROM node:18
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the application files into the working directory
-COPY . /
-
-# Install the application dependencies
+COPY package*.json ./
 RUN npm install
+COPY . .
 
-# Define the entry point for the container
-CMD ["npm", "start"]
+EXPOSE 3333
+CMD ["npm", "dev"]
+
+# Database Service
+# Use the same version as your production database
+FROM bitnami/postgresql:latest
+ENV POSTGRES_DB=apisolid
+ENV POSTGRES_USER=docker
+ENV POSTGRES_PASSWORD=docker
+
+EXPOSE 5432
