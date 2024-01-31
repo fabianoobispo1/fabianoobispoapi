@@ -25,7 +25,6 @@ GymPass Style App
 - [x] A academia so pode ser cadastrada por administradores;
 
 
-
 ## RNFs (Requisitos Não-funcionais) 
 
 - [x] A senha do usuario precisa estar criptografada;
