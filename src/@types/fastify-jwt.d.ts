@@ -3,10 +3,11 @@ import '@fastify/jwt';
 
 declare module '@fastify/jwt' {
   export interface FastifyJWT {
-  
+
     user: {
       sub: string
       administrador?:boolean
+      role?: 'ADMIN' | 'MEMBER'
       sign: {
         sub: string
       }

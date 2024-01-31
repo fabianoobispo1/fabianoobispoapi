@@ -24,7 +24,9 @@ export async function authenticate(
         });
 
         const token = await reply.gymSign(
-            {},
+            {
+                role: user.role,
+            },
             {
                 sign: {
                     sub: user.id,
@@ -34,7 +36,9 @@ export async function authenticate(
 
    
         const refreshToken = await reply.gymSign(
-            {},
+            {
+                role: user.role,
+            },
             {
                 sign: {
                     sub: user.id,
