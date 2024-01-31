@@ -79,6 +79,11 @@ usnado o docker ps -a lista todos ja baixados
 e para rodar o que acabamos de criar e 
 docker start api-solid-pg
 
+#supabase
+estou utilizando o supabase versao graturita,
+ele pode pousar o projeto as vezes 
+o link e https://supabase.com/dashboard/project/lbftsxdjaxjkkiunqani
+
 
 #prisma 
 Ao alterar o arquivo schema.prisma onde e possivel criar tabelas e relacoes entre elas 

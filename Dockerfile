@@ -10,7 +10,7 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["tsup", "src --out-dir build"]
+CMD ["node", "build/server.js"]
 
 
 
