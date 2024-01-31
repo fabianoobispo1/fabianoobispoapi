@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 
 EXPOSE 8080
-CMD ["prisma", "migrate dev"]
+CMD ["prisma", "migrate"]
 
 CMD ["node", "build/server.js"]
 
