@@ -10,7 +10,7 @@ COPY . .
 
 EXPOSE 3333
 
-RUN npm build
+CMD ["npm", "build"]
 
 
 
