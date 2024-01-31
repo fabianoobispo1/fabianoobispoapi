@@ -7,7 +7,7 @@ const envSchema = z.object({
     NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
     JWT_SECRET_GYM: z.string(),
     JWT_SECRET_FA: z.string(),
-    PORT: z.coerce.number().default(3333)
+    PORT: z.coerce.number().default(8080)
 });
 
 //nesse ponto faz a verificacao de fato
