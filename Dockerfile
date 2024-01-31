@@ -10,8 +10,7 @@ COPY . .
 
 EXPOSE 3333
 
-CMD ls -ltr && npm build && npm start
-
+RUN npm build
 
 
 
