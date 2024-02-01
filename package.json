@@ -11,7 +11,8 @@
     "test:watch": "vitest --dir src/use-cases",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "test:e2e": "vitest run --config ./vite.config.e2e.mts"
+    "test:e2e": "vitest run --config ./vite.config.e2e.mts",
+    "prisma:generete": "prisma generate"
   },
   "keywords": [],
   "author": "",

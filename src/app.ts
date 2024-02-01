@@ -49,7 +49,7 @@ app.register(fastifyJwt, {
 
 // Configuração para servir arquivos estáticos
 app.register(fastifyStatic, {
-    root: path.join(__dirname, 'public'),
+    root: path.join(__dirname, '../public'),
     prefix: '/public/', // Prefixo opcional para servir arquivos estáticos
   });
   
@@ -58,7 +58,7 @@ app.register(fastifyStatic, {
     engine: {
       ejs,
     },
-    templates: path.join(__dirname, 'views'),
+    templates: path.join(__dirname, '../views'),
   });
   
   // Rota para a raiz da aplicação
