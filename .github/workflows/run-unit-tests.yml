@@ -17,9 +17,8 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run test
-      
-deploy:
+      - run: npm run test      
+  deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/master' # Only deploy master
     needs: test
