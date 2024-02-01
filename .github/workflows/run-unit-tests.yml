@@ -26,6 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm ci
+      = run: npx prisma generete
       - run: npm run test
 
   deploy:
