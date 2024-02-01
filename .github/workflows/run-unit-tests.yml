@@ -18,3 +18,21 @@ jobs:
       - run: npm ci
 
       - run: npm run test
+      
+deploy:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master' # Only deploy master
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci
+      - name: Run production migration
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - uses: akhileshns/heroku-deploy@v3.4.6
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+
