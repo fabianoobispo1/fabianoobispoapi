@@ -21,7 +21,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/master' # Only deploy master
-    needs: test
+    needs: Run Unit Tests
     steps:
       - uses: actions/checkout@v2
       - run: npm ci
