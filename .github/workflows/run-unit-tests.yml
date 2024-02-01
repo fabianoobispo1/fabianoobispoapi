@@ -3,14 +3,18 @@ name: Run Unit Tests
 on: [push]
 
 jobs:
-
-
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/master' # Only deploy master
-
+    needs: test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
       - run: npm ci
       - name: Run production migration
         run: npm run migrate:deploy
