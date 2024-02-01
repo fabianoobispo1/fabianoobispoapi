@@ -6,8 +6,10 @@ import { profile } from './profile';
 
 import { verifyGymJwt } from '@/http/middlewares/verifyGym-jwt';
 import { refresh } from './refresh';
+import { inicial } from './inicial';
 
 export async function usersRoutes(app: FastifyInstance) {
+    app.get('/', inicial);
     app.post('/users', register);
     app.post('/sessions', authenticate);
     
