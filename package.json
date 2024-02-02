@@ -11,13 +11,16 @@
     "test:watch": "vitest --dir src/use-cases",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "test:e2e": "vitest run --config ./vite.config.e2e.mts"
+    "test:e2e": "vitest run --config ./vite.config.e2e.mts",
+    "heroku-postbuild": "tsup src --out-dir build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/bcryptjs": "2.4.6",
+    "@types/ejs": "3.1.5",
+    "@types/fastify-static": "2.2.1",
     "@types/node": "20.10.6",
     "@types/supertest": "6.0.2",
     "@typescript-eslint/eslint-plugin": "6.17.0",
@@ -36,11 +39,15 @@
   "dependencies": {
     "@fastify/cookie": "9.3.1",
     "@fastify/jwt": "8.0.0",
+    "@fastify/static": "7.0.0",
+    "@fastify/view": "8.2.0",
     "@prisma/client": "5.7.1",
     "bcryptjs": "2.4.3",
     "dayjs": "1.11.10",
     "dotenv": "16.3.1",
+    "ejs": "3.1.9",
     "fastify": "4.25.2",
+    "point-of-view": "6.3.0",
     "prisma": "5.7.1",
     "zod": "3.22.4"
   }
