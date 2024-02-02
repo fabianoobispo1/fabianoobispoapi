@@ -10,14 +10,16 @@ import { appFaRoutes } from './http/controllers/app_fa/routes';
 
 
 
-import fastifyStatic from '@fastify/static';
+/* import fastifyStatic from '@fastify/static';
 import fastifyView from '@fastify/view';
 import ejs from 'ejs';
-import path from 'node:path';
+import path from 'node:path'; */
 
 
 export const app = fastify();
-
+app.get('/', async (request, reply) => {
+    return reply.send({ message: 'Todos REST API is running' });
+});
 app.register(fastifyJwt, {
     secret: env.JWT_SECRET_GYM,
     cookie:{
@@ -47,25 +49,25 @@ app.register(fastifyJwt, {
 });
 
 
-// Configuração para servir arquivos estáticos
+/* // Configuração para servir arquivos estáticos
 app.register(fastifyStatic, {
     root: path.join(__dirname, '../public'),
     prefix: '/public/', // Prefixo opcional para servir arquivos estáticos
-  });
+});
   
-  // Configuração do diretório de views e mecanismo de visualização
-  app.register(fastifyView, {
+// Configuração do diretório de views e mecanismo de visualização
+app.register(fastifyView, {
     engine: {
-      ejs,
+        ejs,
     },
     templates: path.join(__dirname, '../views'),
-  });
+});
   
-  // Rota para a raiz da aplicação
-  app.get('/', async (request, reply) => {
+// Rota para a raiz da aplicação
+app.get('/', async (request, reply) => {
     reply.view('index.ejs'); // Removido 'pages/' do caminho do modelo
-  });
-  
+});
+   */
 
   
 app.register(fastifyCookie);
