@@ -2164,11 +2164,11 @@ var require_Mime = __commonJS({
         }
       }
     };
-    Mime.prototype.getType = function(path3) {
-      path3 = String(path3);
-      let last = path3.replace(/^.*[/\\]/, "").toLowerCase();
+    Mime.prototype.getType = function(path2) {
+      path2 = String(path2);
+      let last = path2.replace(/^.*[/\\]/, "").toLowerCase();
       let ext = last.replace(/^.*\./, "").toLowerCase();
-      let hasPath = last.length < path3.length;
+      let hasPath = last.length < path2.length;
       let hasDot = ext.length < last.length - 1;
       return (hasDot || !hasPath) && this._types[ext] || null;
     };
@@ -11058,11 +11058,11 @@ var require_mime_types = __commonJS({
       }
       return exts[0];
     }
-    function lookup(path3) {
-      if (!path3 || typeof path3 !== "string") {
+    function lookup(path2) {
+      if (!path2 || typeof path2 !== "string") {
         return false;
       }
-      var extension2 = extname2("x." + path3).toLowerCase().substr(1);
+      var extension2 = extname2("x." + path2).toLowerCase().substr(1);
       if (!extension2) {
         return false;
       }
@@ -11331,7 +11331,7 @@ var require_form_data = __commonJS({
     "use strict";
     var CombinedStream = require_combined_stream();
     var util2 = require("util");
-    var path3 = require("path");
+    var path2 = require("path");
     var http = require("http");
     var https = require("https");
     var parseUrl2 = require("url").parse;
@@ -11458,11 +11458,11 @@ var require_form_data = __commonJS({
     FormData.prototype._getContentDisposition = function(value, options) {
       var filename, contentDisposition;
       if (typeof options.filepath === "string") {
-        filename = path3.normalize(options.filepath).replace(/\\/g, "/");
+        filename = path2.normalize(options.filepath).replace(/\\/g, "/");
       } else if (options.filename || value.name || value.path) {
-        filename = path3.basename(options.filename || value.name || value.path);
+        filename = path2.basename(options.filename || value.name || value.path);
       } else if (value.readable && value.hasOwnProperty("httpVersion")) {
-        filename = path3.basename(value.client._httpMessage.path || "");
+        filename = path2.basename(value.client._httpMessage.path || "");
       }
       if (filename) {
         contentDisposition = 'filename="' + filename + '"';
@@ -12396,7 +12396,7 @@ var require_Formidable = __commonJS({
   "node_modules/formidable/src/Formidable.js"(exports2, module2) {
     "use strict";
     var os = require("os");
-    var path3 = require("path");
+    var path2 = require("path");
     var hexoid = (init_dist(), __toCommonJS(dist_exports));
     var once = require_once();
     var dezalgo = require_dezalgo();
@@ -12435,7 +12435,7 @@ var require_Formidable = __commonJS({
       constructor(options = {}) {
         super();
         this.options = { ...DEFAULT_OPTIONS, ...options };
-        const dir = path3.resolve(
+        const dir = path2.resolve(
           this.options.uploadDir || this.options.uploaddir || os.tmpdir()
         );
         this.uploaddir = dir;
@@ -12465,7 +12465,7 @@ var require_Formidable = __commonJS({
         }
         this.options.enabledPlugins.forEach((pluginName) => {
           const plgName = pluginName.toLowerCase();
-          this.use(require(path3.join(__dirname, "plugins", `${plgName}.js`)));
+          this.use(require(path2.join(__dirname, "plugins", `${plgName}.js`)));
         });
         this._setUpMaxFields();
       }
@@ -12805,19 +12805,19 @@ var require_Formidable = __commonJS({
         if (!str) {
           return "";
         }
-        const basename2 = path3.basename(str);
+        const basename2 = path2.basename(str);
         const firstDot = basename2.indexOf(".");
         const lastDot = basename2.lastIndexOf(".");
-        const extname2 = path3.extname(basename2).replace(/(\.[a-z0-9]+).*/i, "$1");
+        const extname2 = path2.extname(basename2).replace(/(\.[a-z0-9]+).*/i, "$1");
         if (firstDot === lastDot) {
           return extname2;
         }
         return basename2.slice(firstDot, lastDot) + extname2;
       }
       _joinDirectoryName(name) {
-        const newPath = path3.join(this.uploadDir, name);
+        const newPath = path2.join(this.uploadDir, name);
         if (!newPath.startsWith(this.uploadDir)) {
-          return path3.join(this.uploadDir, this.options.defaultInvalidName);
+          return path2.join(this.uploadDir, this.options.defaultInvalidName);
         }
         return newPath;
       }
@@ -12828,7 +12828,7 @@ var require_Formidable = __commonJS({
             let ext = "";
             let name = this.options.defaultInvalidName;
             if (part.originalFilename) {
-              ({ ext, name } = path3.parse(part.originalFilename));
+              ({ ext, name } = path2.parse(part.originalFilename));
               if (this.options.keepExtensions !== true) {
                 ext = "";
               }
@@ -14049,15 +14049,15 @@ var require_cookiejar = __commonJS({
     "use strict";
     (function() {
       "use strict";
-      function CookieAccessInfo(domain, path3, secure, script) {
+      function CookieAccessInfo(domain, path2, secure, script) {
         if (this instanceof CookieAccessInfo) {
           this.domain = domain || void 0;
-          this.path = path3 || "/";
+          this.path = path2 || "/";
           this.secure = !!secure;
           this.script = !!script;
           return this;
         }
-        return new CookieAccessInfo(domain, path3, secure, script);
+        return new CookieAccessInfo(domain, path2, secure, script);
       }
       CookieAccessInfo.All = Object.freeze(/* @__PURE__ */ Object.create(null));
       exports2.CookieAccessInfo = CookieAccessInfo;
@@ -17626,13 +17626,13 @@ var require_response = __commonJS({
     Response.prototype.toError = function() {
       const req = this.req;
       const method = req.method;
-      const path3 = req.path;
-      const message = `cannot ${method} ${path3} (${this.status})`;
+      const path2 = req.path;
+      const message = `cannot ${method} ${path2} (${this.status})`;
       const error = new Error(message);
       error.status = this.status;
       error.text = this.text;
       error.method = method;
-      error.path = path3;
+      error.path = path2;
       return error;
     };
     Response.prototype.setStatusProperties = function(status) {
@@ -19083,13 +19083,13 @@ var require_test = __commonJS({
        * @param {String} path
        * @api public
        */
-      constructor(app2, method, path3) {
-        super(method.toUpperCase(), path3);
+      constructor(app2, method, path2) {
+        super(method.toUpperCase(), path2);
         this.redirects(0);
         this.buffer();
         this.app = app2;
         this._asserts = [];
-        this.url = typeof app2 === "string" ? app2 + path3 : this.serverAddress(app2, path3);
+        this.url = typeof app2 === "string" ? app2 + path2 : this.serverAddress(app2, path2);
       }
       /**
        * Returns a URL, extracted from a server.
@@ -19099,13 +19099,13 @@ var require_test = __commonJS({
        * @returns {String} URL address
        * @api private
        */
-      serverAddress(app2, path3) {
+      serverAddress(app2, path2) {
         const addr = app2.address();
         if (!addr)
           this._server = app2.listen(0);
         const port = app2.address().port;
         const protocol = app2 instanceof Server ? "https" : "http";
-        return protocol + "://127.0.0.1:" + port + path3;
+        return protocol + "://127.0.0.1:" + port + path2;
       }
       /**
        * Expectations:
@@ -22342,8 +22342,8 @@ var require_pathval = __commonJS({
       }
       return name in Object(obj);
     }
-    function parsePath(path3) {
-      var str = path3.replace(/([^\\])\[/g, "$1.[");
+    function parsePath(path2) {
+      var str = path2.replace(/([^\\])\[/g, "$1.[");
       var parts = str.match(/(\\\.|[^.]+?)+/g);
       return parts.map(function mapMatches(value) {
         if (value === "constructor" || value === "__proto__" || value === "prototype") {
@@ -22403,8 +22403,8 @@ var require_pathval = __commonJS({
         }
       }
     }
-    function getPathInfo(obj, path3) {
-      var parsed = parsePath(path3);
+    function getPathInfo(obj, path2) {
+      var parsed = parsePath(path2);
       var last = parsed[parsed.length - 1];
       var info = {
         parent: parsed.length > 1 ? internalGetPathValue(obj, parsed, parsed.length - 1) : obj,
@@ -22414,12 +22414,12 @@ var require_pathval = __commonJS({
       info.exists = hasProperty(info.parent, info.name);
       return info;
     }
-    function getPathValue(obj, path3) {
-      var info = getPathInfo(obj, path3);
+    function getPathValue(obj, path2) {
+      var info = getPathInfo(obj, path2);
       return info.value;
     }
-    function setPathValue(obj, path3, val) {
-      var parsed = parsePath(path3);
+    function setPathValue(obj, path2, val) {
+      var parsed = parsePath(path2);
       internalSetPathValue(obj, val, parsed);
       return obj;
     }
@@ -28074,11 +28074,10 @@ async function appFaRoutes(app2) {
 }
 
 // src/app.ts
-var import_static = __toESM(require("@fastify/static"));
-var import_view = __toESM(require("@fastify/view"));
-var import_ejs = __toESM(require("ejs"));
-var import_node_path = __toESM(require("path"));
 var app = (0, import_fastify.default)();
+app.get("/", async (request2, reply) => {
+  return reply.send({ message: "Todos REST API is running" });
+});
 app.register(import_jwt.default, {
   secret: env.JWT_SECRET_GYM,
   cookie: {
@@ -28104,20 +28103,6 @@ app.register(import_jwt.default, {
   sign: {
     expiresIn: "10m"
   }
-});
-app.register(import_static.default, {
-  root: import_node_path.default.join(__dirname, "../public"),
-  prefix: "/public/"
-  // Prefixo opcional para servir arquivos estáticos
-});
-app.register(import_view.default, {
-  engine: {
-    ejs: import_ejs.default
-  },
-  templates: import_node_path.default.join(__dirname, "../views")
-});
-app.get("/", async (request2, reply) => {
-  reply.view("index.ejs");
 });
 app.register(import_cookie.default);
 app.register(appGymRoutes);
@@ -28210,8 +28195,8 @@ function clone(val, seen, options = defaultCloneOptions) {
 }
 function noop() {
 }
-function objectAttr(source, path3, defaultValue = void 0) {
-  const paths = path3.replace(/\[(\d+)\]/g, ".$1").split(".");
+function objectAttr(source, path2, defaultValue = void 0) {
+  const paths = path2.replace(/\[(\d+)\]/g, ".$1").split(".");
   let result = source;
   for (const p2 of paths) {
     result = Object(result)[p2];
@@ -29286,12 +29271,12 @@ var resolve = function(...arguments_) {
   let resolvedPath = "";
   let resolvedAbsolute = false;
   for (let index = arguments_.length - 1; index >= -1 && !resolvedAbsolute; index--) {
-    const path3 = index >= 0 ? arguments_[index] : cwd();
-    if (!path3 || path3.length === 0) {
+    const path2 = index >= 0 ? arguments_[index] : cwd();
+    if (!path2 || path2.length === 0) {
       continue;
     }
-    resolvedPath = `${path3}/${resolvedPath}`;
-    resolvedAbsolute = isAbsolute(path3);
+    resolvedPath = `${path2}/${resolvedPath}`;
+    resolvedAbsolute = isAbsolute(path2);
   }
   resolvedPath = normalizeString(resolvedPath, !resolvedAbsolute);
   if (resolvedAbsolute && !isAbsolute(resolvedPath)) {
@@ -29299,15 +29284,15 @@ var resolve = function(...arguments_) {
   }
   return resolvedPath.length > 0 ? resolvedPath : ".";
 };
-function normalizeString(path3, allowAboveRoot) {
+function normalizeString(path2, allowAboveRoot) {
   let res = "";
   let lastSegmentLength = 0;
   let lastSlash = -1;
   let dots = 0;
   let char = null;
-  for (let index = 0; index <= path3.length; ++index) {
-    if (index < path3.length) {
-      char = path3[index];
+  for (let index = 0; index <= path2.length; ++index) {
+    if (index < path2.length) {
+      char = path2[index];
     } else if (char === "/") {
       break;
     } else {
@@ -29344,9 +29329,9 @@ function normalizeString(path3, allowAboveRoot) {
         }
       } else {
         if (res.length > 0) {
-          res += `/${path3.slice(lastSlash + 1, index)}`;
+          res += `/${path2.slice(lastSlash + 1, index)}`;
         } else {
-          res = path3.slice(lastSlash + 1, index);
+          res = path2.slice(lastSlash + 1, index);
         }
         lastSegmentLength = index - lastSlash - 1;
       }
@@ -32134,16 +32119,16 @@ function parseAbsoluteUrl(input) {
 }
 function parseFileUrl(input) {
   const match = fileRegex.exec(input);
-  const path3 = match[2];
-  return makeUrl("file:", "", match[1] || "", "", isAbsolutePath(path3) ? path3 : "/" + path3, match[3] || "", match[4] || "");
+  const path2 = match[2];
+  return makeUrl("file:", "", match[1] || "", "", isAbsolutePath(path2) ? path2 : "/" + path2, match[3] || "", match[4] || "");
 }
-function makeUrl(scheme, user, host, port, path3, query, hash3) {
+function makeUrl(scheme, user, host, port, path2, query, hash3) {
   return {
     scheme,
     user,
     host,
     port,
-    path: path3,
+    path: path2,
     query,
     hash: hash3,
     type: UrlType.Absolute
@@ -32173,11 +32158,11 @@ function parseUrl(input) {
   url.type = input ? input.startsWith("?") ? UrlType.Query : input.startsWith("#") ? UrlType.Hash : UrlType.RelativePath : UrlType.Empty;
   return url;
 }
-function stripPathFilename(path3) {
-  if (path3.endsWith("/.."))
-    return path3;
-  const index = path3.lastIndexOf("/");
-  return path3.slice(0, index + 1);
+function stripPathFilename(path2) {
+  if (path2.endsWith("/.."))
+    return path2;
+  const index = path2.lastIndexOf("/");
+  return path2.slice(0, index + 1);
 }
 function mergePaths(url, base) {
   normalizePath(base, base.type);
@@ -32215,14 +32200,14 @@ function normalizePath(url, type2) {
     pieces[pointer++] = piece;
     positive++;
   }
-  let path3 = "";
+  let path2 = "";
   for (let i = 1; i < pointer; i++) {
-    path3 += "/" + pieces[i];
+    path2 += "/" + pieces[i];
   }
-  if (!path3 || addTrailingSlash && !path3.endsWith("/..")) {
-    path3 += "/";
+  if (!path2 || addTrailingSlash && !path2.endsWith("/..")) {
+    path2 += "/";
   }
-  url.path = path3;
+  url.path = path2;
 }
 function resolve$1(input, base) {
   if (!input && !base)
@@ -32257,13 +32242,13 @@ function resolve$1(input, base) {
     case UrlType.Query:
       return queryHash;
     case UrlType.RelativePath: {
-      const path3 = url.path.slice(1);
-      if (!path3)
+      const path2 = url.path.slice(1);
+      if (!path2)
         return queryHash || ".";
-      if (isRelative(base || input) && !isRelative(path3)) {
-        return "./" + path3 + queryHash;
+      if (isRelative(base || input) && !isRelative(path2)) {
+        return "./" + path2 + queryHash;
       }
-      return path3 + queryHash;
+      return path2 + queryHash;
     }
     case UrlType.AbsolutePath:
       return url.path + queryHash;
@@ -32276,11 +32261,11 @@ function resolve2(input, base) {
     base += "/";
   return resolve$1(input, base);
 }
-function stripFilename(path3) {
-  if (!path3)
+function stripFilename(path2) {
+  if (!path2)
     return "";
-  const index = path3.lastIndexOf("/");
-  return path3.slice(0, index + 1);
+  const index = path2.lastIndexOf("/");
+  return path2.slice(0, index + 1);
 }
 var COLUMN = 0;
 var SOURCES_INDEX = 1;
@@ -33078,12 +33063,12 @@ var resolve$2 = function(...arguments_) {
   let resolvedPath = "";
   let resolvedAbsolute = false;
   for (let index = arguments_.length - 1; index >= -1 && !resolvedAbsolute; index--) {
-    const path3 = index >= 0 ? arguments_[index] : cwd2();
-    if (!path3 || path3.length === 0) {
+    const path2 = index >= 0 ? arguments_[index] : cwd2();
+    if (!path2 || path2.length === 0) {
       continue;
     }
-    resolvedPath = `${path3}/${resolvedPath}`;
-    resolvedAbsolute = isAbsolute2(path3);
+    resolvedPath = `${path2}/${resolvedPath}`;
+    resolvedAbsolute = isAbsolute2(path2);
   }
   resolvedPath = normalizeString2(resolvedPath, !resolvedAbsolute);
   if (resolvedAbsolute && !isAbsolute2(resolvedPath)) {
@@ -33091,15 +33076,15 @@ var resolve$2 = function(...arguments_) {
   }
   return resolvedPath.length > 0 ? resolvedPath : ".";
 };
-function normalizeString2(path3, allowAboveRoot) {
+function normalizeString2(path2, allowAboveRoot) {
   let res = "";
   let lastSegmentLength = 0;
   let lastSlash = -1;
   let dots = 0;
   let char = null;
-  for (let index = 0; index <= path3.length; ++index) {
-    if (index < path3.length) {
-      char = path3[index];
+  for (let index = 0; index <= path2.length; ++index) {
+    if (index < path2.length) {
+      char = path2[index];
     } else if (char === "/") {
       break;
     } else {
@@ -33136,9 +33121,9 @@ function normalizeString2(path3, allowAboveRoot) {
         }
       } else {
         if (res.length > 0) {
-          res += `/${path3.slice(lastSlash + 1, index)}`;
+          res += `/${path2.slice(lastSlash + 1, index)}`;
         } else {
-          res = path3.slice(lastSlash + 1, index);
+          res = path2.slice(lastSlash + 1, index);
         }
         lastSegmentLength = index - lastSlash - 1;
       }
@@ -33576,8 +33561,8 @@ function resetModules(modules, resetMocks = false) {
     // don't clear mocks
     ...!resetMocks ? [/^mock:/] : []
   ];
-  modules.forEach((mod, path3) => {
-    if (skipPaths.some((re) => re.test(path3)))
+  modules.forEach((mod, path2) => {
+    if (skipPaths.some((re) => re.test(path2)))
       return;
     modules.invalidateModule(mod);
   });
@@ -33602,8 +33587,8 @@ async function waitForImportsToResolve() {
   await Promise.allSettled(promises);
   await waitForImportsToResolve();
 }
-function commonjsRequire(path3) {
-  throw new Error('Could not dynamically require "' + path3 + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
+function commonjsRequire(path2) {
+  throw new Error('Could not dynamically require "' + path2 + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }
 var chaiSubset = { exports: {} };
 (function(module2, exports2) {
@@ -35763,39 +35748,39 @@ function createVitest() {
       assertTypes(factory, '"vi.hoisted" factory', ["function"]);
       return factory();
     },
-    mock(path3, factory) {
+    mock(path2, factory) {
       const importer = getImporter();
       _mocker.queueMock(
-        path3,
+        path2,
         importer,
-        factory ? () => factory(() => _mocker.importActual(path3, importer, _mocker.getMockContext().callstack)) : void 0,
+        factory ? () => factory(() => _mocker.importActual(path2, importer, _mocker.getMockContext().callstack)) : void 0,
         true
       );
     },
-    unmock(path3) {
-      _mocker.queueUnmock(path3, getImporter());
+    unmock(path2) {
+      _mocker.queueUnmock(path2, getImporter());
     },
-    doMock(path3, factory) {
+    doMock(path2, factory) {
       const importer = getImporter();
       _mocker.queueMock(
-        path3,
+        path2,
         importer,
-        factory ? () => factory(() => _mocker.importActual(path3, importer, _mocker.getMockContext().callstack)) : void 0,
+        factory ? () => factory(() => _mocker.importActual(path2, importer, _mocker.getMockContext().callstack)) : void 0,
         false
       );
     },
-    doUnmock(path3) {
-      _mocker.queueUnmock(path3, getImporter());
+    doUnmock(path2) {
+      _mocker.queueUnmock(path2, getImporter());
     },
-    async importActual(path3) {
+    async importActual(path2) {
       return _mocker.importActual(
-        path3,
+        path2,
         getImporter(),
         _mocker.getMockContext().callstack
       );
     },
-    async importMock(path3) {
-      return _mocker.importMock(path3, getImporter());
+    async importMock(path2) {
+      return _mocker.importMock(path2, getImporter());
     },
     mocked(item, _options = {}) {
       return item;
