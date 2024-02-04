@@ -42,5 +42,26 @@ export class InMemoryTodosRepository implements TodosRepository {
             .slice((page - 1) * 20, page * 20);
     }
 
+    async save(todos: Todos) {
+        const todoIndex = this.items.findIndex((item) => item.id === todos.id);
+    
+        if (todoIndex >= 0) {
+            this.items[todoIndex] = todos;
+        }
+    
+        return todos;
+    }
+
+    async delete(id: string) {
+        const todoIndex = this.items.findIndex((item) => item.id === id);
+
+        if (todoIndex >= 0) {
+            this.items.splice(todoIndex,1);
+            return 'Item Removido';
+        }
+      
+        return  'Item Não encontrado';
+    }
+
 
 }

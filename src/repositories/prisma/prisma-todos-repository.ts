@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
+import { Prisma, Todos } from '@prisma/client';
 import { TodosRepository } from '../todos-repository';
 
 
@@ -48,5 +48,27 @@ export class PrismaTodosRepository implements TodosRepository{
         });
 
         return todo;
+    }
+
+    async save(data: Todos) {
+        const todo = await prisma.todos.update({
+            where: {
+                id: data.id,
+            },
+            data,
+        });
+
+        return todo;
+    }
+
+    async delete(id:string){
+        const todo = await prisma.todos.delete({
+            where: {
+                id
+            }
+        });
+        console.log(todo);
+        return 'ok';
+
     }
 }
