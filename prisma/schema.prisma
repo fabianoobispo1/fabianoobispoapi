@@ -1,29 +1,20 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "postgres"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgres"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ADMIN
-  MEMBER
-}
-
 model User {
-  id            String   @id @default(uuid())
+  id            String    @id @default(uuid())
   name          String
-  email         String   @unique
+  email         String    @unique
+  created_at    DateTime  @default(now())
   password_hash String
-  role          Role     @default(MEMBER)
-  created_at    DateTime @default(now())
-
-  checkIns CheckIn[]
+  role          Role      @default(MEMBER)
+  checkIns      CheckIn[]
 
   @@map("users")
 }
@@ -32,30 +23,26 @@ model CheckIn {
   id           String    @id @default(uuid())
   created_at   DateTime  @default(now())
   validated_at DateTime?
-
-  user    User   @relation(fields: [user_id], references: [id])
-  user_id String
-
-  gyn    Gym    @relation(fields: [gym_id], references: [id])
-  gym_id String
+  gym_id       String
+  user_id      String
+  gyn          Gym       @relation(fields: [gym_id], references: [id])
+  user         User      @relation(fields: [user_id], references: [id])
 
   @@map("check_ins")
 }
 
 model Gym {
-  id          String  @id @default(uuid())
+  id          String    @id @default(uuid())
   title       String
   description String?
   phone       String?
   latitude    Decimal
   longitude   Decimal
-
-  checkIns CheckIn[]
+  checkIns    CheckIn[]
 
   @@map("gyms")
 }
 
-//para baixo sao tabelas do projeto pessoal
 model FaUsuario {
   id              String   @id @default(uuid())
   nome            String
@@ -66,4 +53,19 @@ model FaUsuario {
   created_at      DateTime @default(now())
 
   @@map("fa_usuario")
+}
+
+model Todos {
+  id          String   @id @default(uuid())
+  text        String
+  isCompleted Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updatedAt   DateTime @default(now())
+
+  @@map("todos")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
 }

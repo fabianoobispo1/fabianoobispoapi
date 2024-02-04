@@ -7,6 +7,7 @@ import fastifyJwt from '@fastify/jwt';
 
 import { appGymRoutes } from './http/controllers/app_gym/routes';
 import { appFaRoutes } from './http/controllers/app_fa/routes';
+import { appTodoRoutes } from './http/controllers/app_todo/routes';
 
 
 export const app = fastify();
@@ -40,10 +41,18 @@ app.register(fastifyJwt, {
 });
 
 
+app.get('/', async (request, reply) => {
+    return reply.status(200).send({
+        message: 'Fabiano REST API is running' 
+    });
+});
+
+
 app.register(fastifyCookie);
 
 app.register(appGymRoutes);
 app.register(appFaRoutes);
+app.register(appTodoRoutes);
 
 app.setErrorHandler((error, _, reply) => {
     if (error instanceof ZodError) {

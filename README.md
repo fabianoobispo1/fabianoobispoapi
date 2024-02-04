@@ -93,3 +93,30 @@ npx prisma migrate dev, que vai vertificar a base e se tiver alteraceos sera rea
 para ver a base pode usar o npx prisma studio
 
 
+## Passo a passo para adicionar uma nova funcionalidade 
+nesse caso vou criar a funcionalidade de lista de tarefas
+onde sera possivel criar nova tarefa, editar, listar, e marcar como comcluido
+
+- editar o rquivo schema.prisma para adicionar uma nova tabela ou alterar 
+model Todos {
+  id          String   @id @default(uuid())
+  text        String
+  isCompleted Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updatedAt   DateTime @default(now())
+
+  @@map("todos")
+}
+
+- comando npx prisma migrate dev para de fato realizar a alteracao na base 
+- comando npx prisma db pull para atualizar o  Prisma Client
+
+- parte de repositories criar os arquivos repositories/in-memory/in-memory-todos-repository.ts 
+, repositories/prisma/prisma-todos-repository.ts e todos-repository.ts
+
+
+- parte de use case 
+nessa parte devera ser cirado um arquivo para cada funcionalidade e os arquivos de testes unitarios
+
+- parte http
+nessa parte que criamos a rota de fato, na pasta controlers 
