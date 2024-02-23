@@ -1,5 +1,6 @@
 import fastify from 'fastify';
 import fastifyCookie from '@fastify/cookie';
+import cors from '@fastify/cors';
 
 import { ZodError } from 'zod';
 import { env } from '@/env';
@@ -39,8 +40,9 @@ app.register(fastifyJwt, {
         expiresIn:'10m'
     }
 });
-
-
+app.register(cors, { 
+    origin:'http://localhost:3000'
+});
 app.get('/', async (request, reply) => {
     return reply.status(200).send({
         message: 'Fabiano REST API is running' 
