@@ -3,6 +3,8 @@ import { FaTransacaoRegister } from './faTransacaoRegisteer';
 import { InMemoryFaTransacoesRepository } from '@/repositories/in-memory/in-memory-faTransacoes-repository';
 
 import { InMemoryFaUsuariosRepository } from '@/repositories/in-memory/in-memory-faUsuarios-repository';
+import { MaxDistanceError } from './errors/max-distance-error';
+import { ResourceNotFoundError } from './errors/resource-not-found-error';
 
 let faTransacaoRepository: InMemoryFaTransacoesRepository;
 let faUsuarioRepository: InMemoryFaUsuariosRepository;
@@ -37,26 +39,25 @@ describe('Registro transicao FA', () => {
     });
 
 
-/* 
-    it('E possivel criar a hash durnate o registro', async () => {
+
+    it('Nao e possivel realizar transicao com usuario que nao existe', async () => {
 
 
-        const { faUsuario } = await sut.execute({
-            nome: 'Usuario teste',
-            email: 'email@teste.com.br',
-            password: '123456',
-            data_nascimento: '1990-04-24T00:00:00Z'
-        });
+     
+        await expect(() =>
+        sut.execute({
+            titulo: 'Conta Teste',
+            tipo: 'S',
+            valor: 12.4,
+            vencimento: '2024-04-24T00:00:00Z',
+            faUsuario_id:'id invalido'
 
-        const isPasswordCorrectHashed = await compare(
-            '123456',
-            faUsuario.password_hash
-        );
+        })).rejects.toBeInstanceOf(ResourceNotFoundError);
 
-        expect(isPasswordCorrectHashed).toBe(true);
+
      
     });
-
+/* 
     it('Nao e possivel registar com o mesmo email duas vezes ', async () => {
 
 
