@@ -44,15 +44,31 @@ model Gym {
 }
 
 model FaUsuario {
-  id              String   @id @default(uuid())
+  id              String        @id @default(uuid())
   nome            String
-  email           String   @unique
+  email           String        @unique
   password_hash   String
-  administrador   Boolean  @default(false)
+  administrador   Boolean       @default(false)
   data_nascimento DateTime
-  created_at      DateTime @default(now())
+  created_at      DateTime      @default(now())
+  FaTransacao     FaTransacao[]
 
   @@map("fa_usuario")
+}
+
+model FaTransacao {
+  id         String   @id @default(uuid())
+  titulo     String
+  valor      Float
+  tipo       String
+  vencimento DateTime
+  updated_at DateTime @default(now())
+  created_at DateTime @default(now())
+
+  faUsuario    FaUsuario @relation(fields: [faUsuario_id], references: [id])
+  faUsuario_id String
+
+  @@map("fa_transacao")
 }
 
 model Todos {
