@@ -2,7 +2,7 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import {  date, z } from 'zod';
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error';
 
-import { makeListFaTransacao } from '@/use-cases/factories/make-faTransacao-listar-periodo-use.case';
+import { makeListFaTransacao } from '@/use-cases/factories/make-faTransacao-listar-use-case';
 
 export async function faListar(request: FastifyRequest, reply: FastifyReply) {
 

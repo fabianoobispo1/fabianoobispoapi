@@ -5,3 +5,4 @@ export interface FaTransacaoRepository {
  /*  findByEmail(email: string): Promise<FaUsuario | null>*/
   create(data: Prisma.FaTransacaoUncheckedCreateInput): Promise<FaTransacao> 
   findByDate( date: Date): Promise<FaTransacao[]| null>
+}

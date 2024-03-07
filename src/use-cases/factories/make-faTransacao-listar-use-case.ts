@@ -1,6 +1,6 @@
 import { PrismaTransacaoRepository } from '@/repositories/prisma/prisma-faTransaccao-repository';
 
-import { FaTransacaoPeriodo } from '../faTransacaoList';
+import { FaTransacaoPeriodo } from '../faTransacaolist';
 
 
 export function makeListFaTransacao() {
