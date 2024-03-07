@@ -1,21 +1,53 @@
 import { FaTransacaoRepository } from '@/repositories/faTransacao-repository';
 import { FaTransacao, Prisma } from '@prisma/client';
 import { randomUUID } from 'node:crypto';
-
+import dayjs from 'dayjs';
 
 export class InMemoryFaTransacoesRepository implements FaTransacaoRepository {
     public items: FaTransacao[] = [];
 
- /*    async findById(id: string) {
-        const faUsuario = this.items.find((item) => item.id === id);
+         async findById(id: string) {
+        const faTransacao = this.items.find((item) => item.id === id);
 
-        if (!faUsuario) {
+        if (!faTransacao) {
             return null;
         }
 
-        return faUsuario;
+        return faTransacao;
     }
+
+    async findByDate(date: Date){
+        const startOfTheDay = dayjs(date).startOf('date');
+        const endOfTheDay = dayjs(date).endOf('date');
+
+        const faTransacaoOnSameDate = this.items.filter((faTransacao) => {
+            const checkInDate = dayjs(faTransacao.created_at);
+            const isOnSameDate =
+            checkInDate.isAfter(startOfTheDay) && checkInDate.isBefore(endOfTheDay)
     
+            return faTransacao.id===faTransacao.id && isOnSameDate
+        });
+
+    
+        if (!faTransacaoOnSameDate) {
+            return null;
+        }
+    
+        return faTransacaoOnSameDate;
+
+    }
+
+    async findByUserIdOnDate(userId: string, date: Date) {
+
+    
+        
+    }
+
+
+    
+
+
+ /*     
     async findByEmail(email: string) {
         const faUsuario = this.items.find((item) => item.email === email);
 
@@ -26,7 +58,8 @@ export class InMemoryFaTransacoesRepository implements FaTransacaoRepository {
         return faUsuario;
     }
  */
- 
+    
+
 
     async create(data: Prisma.FaTransacaoUncheckedCreateInput) {
         const faTransacao = {            
