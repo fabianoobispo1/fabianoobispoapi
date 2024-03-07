@@ -41,11 +41,12 @@ app.register(fastifyJwt, {
     }
 });
 app.register(cors, { 
-    origin:'http://localhost:3000'
+
+    origin:'*'
 });
 app.get('/', async (request, reply) => {
     return reply.status(200).send({
-        message: 'Fabiano REST API is running' 
+        message: 'Fabiano REST API is running in '+env.PORT +' Port.' 
     });
 });
 
