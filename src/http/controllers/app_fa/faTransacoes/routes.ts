@@ -10,5 +10,5 @@ export async function faTransicoesRoutes(app: FastifyInstance) {
     /** Authenticated */
 
     app.post('/fatransacaoregister',{ onRequest: [verifyFaJwt]}, faRegister);
-    app.post('/fatransacaolistar',{ onRequest: [verifyFaJwt]}, faListar);
+    app.get('/fatransacaolistar',{ onRequest: [verifyFaJwt]}, faListar);
 }
