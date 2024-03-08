@@ -8,7 +8,7 @@ import { verifyFaJwt } from '@/http/middlewares/verifyFa-jwt';
 import { faRefresh } from './faRefresh';
 
 export async function faUsuarioRoutes(app: FastifyInstance) {    
-    app.post('/fausuario', faRegister);
+    app.post('/api/auth/register', faRegister);
     app.post('/fasesao', faAutenticacao);
 
     app.patch('/token/farefresh', faRefresh);
