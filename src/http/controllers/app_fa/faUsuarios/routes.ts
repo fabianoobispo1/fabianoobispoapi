@@ -6,13 +6,17 @@ import { faPerfil } from './faPerfil';
 
 import { verifyFaJwt } from '@/http/middlewares/verifyFa-jwt';
 import { faRefresh } from './faRefresh';
+import { faPerfilId } from './faPerfilId';
 
 export async function faUsuarioRoutes(app: FastifyInstance) {    
-    app.post('/api/auth/register', faRegister);
+    app.post('/fausuario', faRegister);
     app.post('/fasesao', faAutenticacao);
 
+    app.post('/faperfilid', faPerfilId);
     app.patch('/token/farefresh', faRefresh);
     /** Authenticated */
 
     app.get('/faperfil',{ onRequest: [verifyFaJwt]}, faPerfil);
+
+
 }

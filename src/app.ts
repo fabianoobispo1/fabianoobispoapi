@@ -37,7 +37,7 @@ app.register(fastifyJwt, {
     jwtVerify: 'faVerify',
     jwtSign: 'faSign',
     sign:{
-        expiresIn:'10m'
+        expiresIn:'60m'
     }
 });
 app.register(cors, { 
