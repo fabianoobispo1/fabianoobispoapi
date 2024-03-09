@@ -120,3 +120,6 @@ nessa parte devera ser cirado um arquivo para cada funcionalidade e os arquivos 
 
 - parte http
 nessa parte que criamos a rota de fato, na pasta controlers 
+
+endereco externo api 
+https://fabianoobispoapi.onrender.com
