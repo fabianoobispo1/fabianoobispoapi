@@ -1,9 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import {   z } from 'zod';
+
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error';
 
-import { makeListFaTransacao } from '@/use-cases/factories/make-faTransacao-listar-use-case';
-import dayjs from 'dayjs';
 import { prisma } from '@/lib/prisma';
 
 export async function faListar(request: FastifyRequest, reply: FastifyReply) {
