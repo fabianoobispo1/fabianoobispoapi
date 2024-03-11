@@ -8,6 +8,8 @@ import { verifyFaJwt } from '@/http/middlewares/verifyFa-jwt';
 import { faRefresh } from './faRefresh';
 import { faPerfilId } from './faPerfilId';
 import { apagar } from './apagar';
+import { faListarUsuarios } from './faListarUsuarios';
+import { faUsuarioAdmin } from './faUsuarioAdmin';
 
 export async function faUsuarioRoutes(app: FastifyInstance) {    
     app.post('/fausuario', faRegister);
@@ -20,6 +22,11 @@ export async function faUsuarioRoutes(app: FastifyInstance) {
     /** Authenticated */
 
     app.get('/faperfil',{ onRequest: [verifyFaJwt]}, faPerfil);
+    
+    app.get('/listarusuarios',{ onRequest: [verifyFaJwt]}, faListarUsuarios);
+
+    app.post('/alterarusuarioadmin',{ onRequest: [verifyFaJwt]}, faUsuarioAdmin);
+
 
 
 }

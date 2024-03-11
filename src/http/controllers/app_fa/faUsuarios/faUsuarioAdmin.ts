@@ -4,36 +4,37 @@ import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-e
 
 import { prisma } from '@/lib/prisma';
 
-export async function faRegister(request: FastifyRequest, reply: FastifyReply) {
+export async function faUsuarioAdmin(request: FastifyRequest, reply: FastifyReply) {
 
     const registerBodySchema = z.object({
-        titulo: z.string(),
-        tipo: z.string().max(1),
-        valor: z.number(),
-        vencimento: z.string().datetime(),        
-
+        faUsuario_id: z.string().min(6),
+        faUsuarioAdmin: z.boolean(),      
     });
+    const { faUsuario_id, faUsuarioAdmin } = registerBodySchema.parse(request.body);
 
-    const { titulo, tipo, valor, vencimento } = registerBodySchema.parse(request.body);
+    const usuarioIDALterador = request.user.sub;
 
-    //verifica se o usuario logado e administrador 
-    const usuarioLogado = request.user.sub;
+
+    //verifica se o usuario alterador e administrador 
     const isAdmin = await prisma.faUsuario.findUnique({
         where:{
-            id: usuarioLogado,
+            id: usuarioIDALterador,
             administrador: true
         }
-    }); 
+    });
+    
     if(!isAdmin){
         return reply.status(403).send({mesage: 'usuario nao e um admin'});
     }
 
-
     try {
 
-        const resutPrisma = await prisma.faTransacao.create({
+        const resutPrisma = await prisma.faUsuario.update({
             data:{
-                titulo, tipo, valor, vencimento, faUsuario_id:usuarioLogado
+                administrador: faUsuarioAdmin
+            },
+            where:{
+                id :faUsuario_id
             }
         });
         return reply.status(201).send(resutPrisma);

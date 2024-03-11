@@ -9,5 +9,5 @@ export async function appTodoRoutes(app: FastifyInstance) {
     app.post('/todoadicionar', registrarTodo);
     app.get('/todolistar', listarTodo);
     app.post('/todocheck', checkTodo );
-    app.delete('/tododelete', deleteTodo);
+    app.post('/tododelete', deleteTodo);
 }

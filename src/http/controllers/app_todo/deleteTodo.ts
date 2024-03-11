@@ -5,11 +5,11 @@ import { z } from 'zod';
 import {  makeCheckTodoUseCase } from '@/use-cases/factories/make-todos-delete-use-case';
 
 export async function deleteTodo(request: FastifyRequest, reply: FastifyReply) {
-    const idquerySchema = z.object({
+    const idBodySchema = z.object({
         id: z.string().uuid(),
     });
 
-    const { id } = idquerySchema.parse(request.query);
+    const { id } = idBodySchema.parse(request.body);
 
 
     const checkTodoUseCase = makeCheckTodoUseCase();
