@@ -11,9 +11,7 @@
     "test:watch": "vitest --dir src/use-cases",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "test:e2e": "vitest run --config ./vite.config.e2e.mts",
-    "production": "node build/server.js",
-    "postinstall": "tsc"
+    "test:e2e": "vitest run --config ./vite.config.e2e.mts"
 
   },
   "keywords": [],
