@@ -8,11 +8,27 @@ export async function faListar(request: FastifyRequest, reply: FastifyReply) {
 
     
     try {
-     
-        const resutPrisma = await prisma.faTransacao.findMany({
+        let totalPagamentos = 0;
+        let totalRecebimentos = 0;
+        const resutPrisma = await prisma.faTransacao.findMany({     
             
         });
-        return reply.status(201).send(resutPrisma);
+
+        resutPrisma.forEach((result) => {
+            if(result.tipo == 'P'){
+                totalPagamentos = totalPagamentos + result.valor;
+            }
+            if(result.tipo == 'R'){
+                totalRecebimentos = totalRecebimentos + result.valor;
+            }
+            
+        });
+
+      
+        return reply.status(200).send({
+            totalPagamentos,
+            totalRecebimentos,
+            transacoes :resutPrisma});
     } catch (err) {
         if (err instanceof UserAlreadyExistsError){
             return reply.status(409).send({mesage: err.message});
@@ -20,7 +36,5 @@ export async function faListar(request: FastifyRequest, reply: FastifyReply) {
 
         throw err;
     }
-    return reply.status(201).send();
-
 
 }
