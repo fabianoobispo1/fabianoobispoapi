@@ -53,6 +53,8 @@ model FaUsuario {
   created_at      DateTime      @default(now())
   FaTransacao     FaTransacao[]
 
+  atleta FaAtleta? @relation("AtletaUsuario")
+
   @@map("fa_usuario")
 }
 
@@ -71,6 +73,24 @@ model FaTransacao {
   @@map("fa_transacao")
 }
 
+model FaAtleta {
+  id          String     @id @default(uuid())
+  data_inicio DateTime
+  tipo        TipoAtleta
+  posicao     String
+  numero      Decimal
+  altura      Float
+  pesso       Float
+  updated_at  DateTime   @default(now())
+  created_at  DateTime   @default(now())
+
+  // Relação um para um com FaUsuario
+  usuario     FaUsuario @relation("AtletaUsuario", fields: [faUsuarioId], references: [id])
+  faUsuarioId String    @unique
+
+  @@map("fa_atleta")
+}
+
 model Todos {
   id          String   @id @default(uuid())
   text        String
@@ -84,4 +104,10 @@ model Todos {
 enum Role {
   ADMIN
   MEMBER
+}
+
+enum TipoAtleta {
+  ATAQUE
+  DEFESA
+  ST
 }
