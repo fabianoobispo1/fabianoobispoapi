@@ -121,5 +121,14 @@ nessa parte devera ser cirado um arquivo para cada funcionalidade e os arquivos 
 - parte http
 nessa parte que criamos a rota de fato, na pasta controlers 
 
+
+api esta postada em 
+https://dashboard.render.com/
+
 endereco externo api 
 https://fabianoobispoapi.onrender.com
+
+banco de dados postgres 
+esta em https://neon.tech/ 
+
+fornt esta no vercel 
