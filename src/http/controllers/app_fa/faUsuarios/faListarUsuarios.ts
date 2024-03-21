@@ -11,6 +11,9 @@ export async function faListarUsuarios(request: FastifyRequest, reply: FastifyRe
     try {
      
         const resutPrisma = await prisma.faUsuario.findMany({
+            include: {
+                atleta:true
+            }
             
         });
         return reply.status(201).send(resutPrisma);
