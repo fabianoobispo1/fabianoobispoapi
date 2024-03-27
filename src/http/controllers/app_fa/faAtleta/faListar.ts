@@ -10,7 +10,13 @@ export async function faListarAtleta(request: FastifyRequest, reply: FastifyRepl
     try {
         const listAtletas = await prisma.faAtleta.findMany({     
         include:{
-            usuario: true,
+            usuario: {
+                select:{
+                    nome: true,
+                    email: true,
+                    data_nascimento: true
+                }
+            },
         }
         });      
         return reply.status(200).send({
