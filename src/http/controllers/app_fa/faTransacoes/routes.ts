@@ -5,6 +5,7 @@ import { faListar } from './faListar';
 
 import { verifyFaJwt } from '@/http/middlewares/verifyFa-jwt';
 import { faApagar } from './faapagar';
+import { faListarPeriodo } from './faListarPeriodo';
 
 
 export async function faTransicoesRoutes(app: FastifyInstance) {    
@@ -13,4 +14,5 @@ export async function faTransicoesRoutes(app: FastifyInstance) {
     app.post('/fatransacaoregister',{ onRequest: [verifyFaJwt]}, faRegister);
     app.get('/fatransacaolistar',{ onRequest: [verifyFaJwt]}, faListar);
     app.post('/fatransacaoapagar',{ onRequest: [verifyFaJwt]}, faApagar);
+    app.post('/fatransacaolistarperiodo', { onRequest: [verifyFaJwt]}, faListarPeriodo)
 }
