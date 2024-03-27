@@ -10,6 +10,7 @@ import { faPerfilId } from './faPerfilId';
 import { apagar } from './apagar';
 import { faListarUsuarios } from './faListarUsuarios';
 import { faUsuarioAdmin } from './faUsuarioAdmin';
+import { faUsuarioTrocaSenha } from './faUsuarioTrocaSenha';
 
 export async function faUsuarioRoutes(app: FastifyInstance) {    
     app.post('/fausuario', faRegister);
@@ -26,6 +27,9 @@ export async function faUsuarioRoutes(app: FastifyInstance) {
     app.get('/listarusuarios',{ onRequest: [verifyFaJwt]}, faListarUsuarios);
 
     app.post('/alterarusuarioadmin',{ onRequest: [verifyFaJwt]}, faUsuarioAdmin);
+
+    
+    app.post('/alterarusuariosenha',{ onRequest: [verifyFaJwt]}, faUsuarioTrocaSenha);
 
 
 
