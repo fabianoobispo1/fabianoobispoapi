@@ -17,7 +17,7 @@ export async function faListarPeriodo(request: FastifyRequest, reply: FastifyRep
         let totalRecebimentos = 0;
         const resutPrisma = await prisma.faTransacao.findMany({  
             where:{
-             vencimento: { lte: dataInicial, gte: dataFinal},         
+             vencimento: { lte: new Date(dataInicial), gte: new Date(dataFinal)},         
             }   
             
         });
