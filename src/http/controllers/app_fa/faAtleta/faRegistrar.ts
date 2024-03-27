@@ -56,6 +56,18 @@ export async function FaRegistrarAtleta(request: FastifyRequest, reply: FastifyR
         });
     }
 
+    //verifica se atleta ja foi cadastrado
+
+    const resultatleta = await prisma.faAtleta.findUnique({
+        where:{
+            faUsuarioId: faUsuario.id
+        }
+    })
+
+    if (resultatleta) {
+        return reply.status(403).send({mesage: "Atleta ja registrado"});
+    }
+    
     //realiza o cadstro do atleta com o id do usuario informado 
     try {
 
