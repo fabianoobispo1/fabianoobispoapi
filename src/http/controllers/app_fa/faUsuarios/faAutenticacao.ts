@@ -3,6 +3,8 @@ import { z } from 'zod';
 
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error';
 import { makeFaAutenticacaoUseCase } from '@/use-cases/factories/make-faAutenticacao-use-case';
+import { prisma } from '@/lib/prisma';
+import { compare } from 'bcryptjs';
 
 export async function faAutenticacao(
     request: FastifyRequest,
@@ -18,10 +20,30 @@ export async function faAutenticacao(
     try {        
         const authenticateUseCase =makeFaAutenticacaoUseCase();
 
-        const { faUsuario } = await authenticateUseCase.execute({
+      /*   const { faUsuario } = await authenticateUseCase.execute({
             email,
             password,
         });
+ */
+        const faUsuario = await prisma.faUsuario.findUnique({
+            where: {
+                email
+            }
+        });
+
+        if (!faUsuario) {
+           //throw new InvalidCredentialsError();
+            return reply.status(400).send({ message: "Usuario não encontrado." });
+        }
+
+        const doestPasswordMatches = await compare(password, faUsuario.password_hash);
+
+        if (!doestPasswordMatches) {
+            //throw new InvalidCredentialsError();
+            return reply.status(400).send({ message: "Senha Invalida." });
+        }
+    
+       
            
         const token = await reply.faSign(
             {},
