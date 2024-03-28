@@ -1,4 +1,4 @@
-import { makeGetFaUsiarioPerfilUseCase } from '@/use-cases/factories/make-get-faUsuario-perfil-use.case';
+import { prisma } from '@/lib/prisma';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
@@ -10,12 +10,15 @@ export async function faPerfilId(request: FastifyRequest, reply: FastifyReply) {
 
     const { id } = registerBodySchema.parse(request.body);
 
-
-    const getFaUsuarioPerfil = makeGetFaUsiarioPerfilUseCase();
-
-    const { faUsuario } = await getFaUsuarioPerfil.execute({
-        userId: id
+    const  faUsuario  = await prisma.faUsuario.findUnique({
+        where:{
+            id
+        }
     });
+
+    if (!faUsuario) {
+        return reply.status(400).send({ message: "Usuario não encontrado." });
+    }
     
     return reply.status(200).send({
         faUsuario: {
