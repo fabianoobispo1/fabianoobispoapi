@@ -17,7 +17,7 @@ export async function faPerfilId(request: FastifyRequest, reply: FastifyReply) {
     });
 
     if (!faUsuario) {
-        return reply.status(400).send({ message: "Usuario não encontrado." });
+        return reply.status(400).send({ message: "Usuário não encontrado." });
     }
     
     return reply.status(200).send({

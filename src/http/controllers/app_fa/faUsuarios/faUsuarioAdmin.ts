@@ -1,7 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import {  z } from 'zod';
-import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error';
-
 import { prisma } from '@/lib/prisma';
 
 export async function faUsuarioAdmin(request: FastifyRequest, reply: FastifyReply) {
@@ -41,13 +39,6 @@ export async function faUsuarioAdmin(request: FastifyRequest, reply: FastifyRepl
      
      
     } catch (err) {
-        if (err instanceof UserAlreadyExistsError){
-            return reply.status(403).send({mesage: err.message});
-        }
-
-        throw err;
+        return reply.status(400).send({ message: "Erro Interno"}); 
     }
-    return reply.status(201).send();
-
-
 }

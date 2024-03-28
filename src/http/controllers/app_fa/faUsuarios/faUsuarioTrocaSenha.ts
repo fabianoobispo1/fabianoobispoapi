@@ -1,6 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import {  z } from 'zod';
-import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error';
 import { compare, hash } from 'bcryptjs';
 
 import { prisma } from '@/lib/prisma';
@@ -47,12 +46,6 @@ export async function faUsuarioTrocaSenha(request: FastifyRequest, reply: Fastif
      
      
     } catch (err) {
-        if (err instanceof UserAlreadyExistsError){
-            return reply.status(403).send({mesage: err.message});
-        }
-
-        throw err;
+        return reply.status(400).send({ message: "Erro Interno"}); 
     }
-
-
 }

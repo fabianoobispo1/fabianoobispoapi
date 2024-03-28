@@ -23,7 +23,7 @@ export async function faAutenticacao(
         });
 
         if (!faUsuario) {
-            return reply.status(400).send({ message: "Usuario não encontrado." });
+            return reply.status(400).send({ message: "Usuário não encontrado." });
         }
 
         const doestPasswordMatches = await compare(password, faUsuario.password_hash);
